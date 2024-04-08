@@ -53,4 +53,12 @@
 
                 imgBox.classList.add("show-img");
             }
+
+            // Add click event listener to the button
+                if (qrButton) {
+                    qrButton.addEventListener("click", generateQr);
+                } else {
+                    console.error("Button not found!");
+                }
+            </script>
 </body>
