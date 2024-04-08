@@ -27,4 +27,30 @@
         // QR code API URL
         let apiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
 
+        // Function to generate QR code
+            function generateQr() {
+                // Construct the full URL for the QR code
+                let fullUrl = apiUrl + encodeURIComponent(qrText.value.trim());
+
+                // Fetch the QR code image
+                fetch(fullUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                            throw new Error('Network response was not ok.');
+                        }
+
+                        throw new Error('Network response was not ok.');
+                    })
+                    .then(blob => {
+                        // Create URL for the blob and set it as the image source
+                        qrImage.src = URL.createObjectURL(blob);
+                        imgBox.style.display = "block"; // Show the image box
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with fetching the QR code:', error);
+                    });
+
+                imgBox.classList.add("show-img");
+            }
 </body>
